@@ -22,21 +22,22 @@ public class PostResourceTest {
     @BeforeEach
     public void setUp() {
         repository.save(new Post(1L, "Introduction to Spring Boot",
-        "Spring Boot is a powerful framework for building Java applications.",
-        LocalDateTime.parse("2023-07-13T12:30:00"), new User(1L)));
+                "Spring Boot is a powerful framework for building Java applications.",
+                LocalDateTime.parse("2023-07-13T12:30:00"), new User(1L)));
     }
 
     @Test
-    public void testQuery(){
+    public void testQuery() {
         List<Post> posts = repository.findByTitle("Introduction to Spring Boot");
         assertEquals(1, posts.size());
         assertEquals("Introduction to Spring Boot", posts.get(0).getTitle());
     }
 
     @Test
-    public void testCreate(){
-        Post post = new Post(2L, "RESTful APIs with Node.js", "Learn how to create RESTful APIs using Node.js and Express.",
-        LocalDateTime.parse("2023-07-12T15:45:00"), new User(2L));
+    public void testCreate() {
+        Post post = new Post(2L, "RESTful APIs with Node.js",
+                "Learn how to create RESTful APIs using Node.js and Express.",
+                LocalDateTime.parse("2023-07-12T15:45:00"), new User(2L));
         repository.save(post);
         List<Post> posts = repository.findByTitle("RESTful APIs with Node.js");
         assertEquals(1, posts.size());
@@ -44,9 +45,10 @@ public class PostResourceTest {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         repository.deleteAll();
         List<Post> posts = repository.findAll();
         assertEquals(0, posts.size());
     }
+
 }

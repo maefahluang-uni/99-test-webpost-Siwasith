@@ -20,7 +20,6 @@ import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import lab.webpost.domain.Post;
 import lab.webpost.domain.User;
 
@@ -83,7 +82,7 @@ public class PostResourceIT {
         // Populate the Web service with Posts.
         for (Post post : posts) {
             builder = client.target(WEB_SERVICE_URI).request(MediaType.APPLICATION_JSON);
-          
+
             try (Response response = builder.post(Entity.json(post))) {
                 LOGGER.warn("STATUS: " + response.getStatus());
             }
@@ -103,19 +102,21 @@ public class PostResourceIT {
     @Test
     public void testCreate() {
         // Create a new Post.
-        Post newpost = new Post(8L, "React State Management", "Explore different state management techniques in React applications.", LocalDateTime.parse("2023-07-06T13:20:00"), new User(4L));
-        
+        Post newpost = new Post(8L, "React State Management",
+                "Explore different state management techniques in React applications.",
+                LocalDateTime.parse("2023-07-06T13:20:00"), new User(4L));
+
         // Prepare an invocation on the Concert service
         Builder builder = client.target(WEB_SERVICE_URI).request(MediaType.APPLICATION_JSON);
 
-        // Make the service invocation via a HTTP POST message, and wait for the response.
+        // Make the service invocation via a HTTP POST message, and wait for the
+        // response.
         try (Response response = builder.post(Entity.json(newpost))) {
 
             // Check that the HTTP response code is 201 Created.
             int responseCode = response.getStatus();
             assertEquals(Response.Status.CREATED.getStatusCode(), responseCode);
 
-           
         }
     }
 
@@ -127,7 +128,8 @@ public class PostResourceIT {
         Builder builder = client.target(WEB_SERVICE_URI).request()
                 .accept(MediaType.APPLICATION_JSON);
 
-        // Make the service invocation via a HTTP GET message, and wait for the response.
+        // Make the service invocation via a HTTP GET message, and wait for the
+        // response.
         try (Response response = builder.get()) {
 
             // Check that the HTTP response code is 200 OK.
@@ -146,9 +148,10 @@ public class PostResourceIT {
         Long postid = postUris.get(postUris.size() - 1);
 
         // Prepare an invocation on a Post URI.
-        Builder builder = client.target(WEB_SERVICE_URI+"/"+postid).request();
+        Builder builder = client.target(WEB_SERVICE_URI + "/" + postid).request();
 
-        // Make the service invocation via a HTTP DELETE message, and wait for the response.
+        // Make the service invocation via a HTTP DELETE message, and wait for the
+        // response.
         try (Response response = builder.delete()) {
 
             // Check that the DELETE request was successful.
@@ -156,7 +159,7 @@ public class PostResourceIT {
         }
         // Requery the Concert.
         try (Response response = client
-                .target(WEB_SERVICE_URI+"/"+postid)
+                .target(WEB_SERVICE_URI + "/" + postid)
                 .request()
                 .accept(MediaType.APPLICATION_JSON)
                 .get()) {
