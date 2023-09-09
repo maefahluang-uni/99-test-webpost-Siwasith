@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post Messages</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Post a Message</h2>
+    <form id="postForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="body">Message:</label>
+        <textarea id="body" name="body" required></textarea><br>
+        <input type="submit" value="Post">
+    </form>
+    <div id="postList">
+        <!-- Posts will be displayed here -->
+    </div>
+    <script>
+        // Fetch the username from localStorage
+        var username = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')).username : null;
+        function dateToISOButLocal(date) {
+            return date.toLocaleString('sv').replace(' ', 'T');
+        }
+        // Function to fetch and display posts
+        function fetchPosts() {
+            $.ajax({
+                url: 'http://localhost:8080/posts', // Replace with your backend API URL to fetch posts
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    var postList = $('#postList');
+                    postList.empty(); // Clear previous posts
+                    response.forEach(function (post) {
+                        var postItem = $('<div class="post-item"><strong>' + post.author.username + '</strong>: ' + post.body + '</div>');
+                        postList.append(postItem);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error fetching posts:', error);
+                }
+            });
+        }
+
+        // Function to handle form submission and post message
+        $('#postForm').submit(function (e) {
+            e.preventDefault();
+            var userId = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')).userId : null;
+            var postData = {
+                title:  $('#title').val(),
+                body: $('#body').val(),
+                createdAt: dateToISOButLocal(new Date()),
+                author: {
+                    id: userId
+                }
+            };
+            console.log(localStorage.getItem('userInfo'));
+            console.log('Post data:', JSON.stringify(postData));
+            $.ajax({
+                url: 'http://localhost:8080/posts', // Replace with your backend API URL to save the post
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(postData),
+                success: function (response) {
+                    console.log('Post successful:', response);
+                    fetchPosts(); // Fetch and refresh the post list
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error posting message:', error);
+                }
+            });
+        });
+
+        // Fetch and display posts on page load
+        $(document).ready(function () {
+            fetchPosts();
+        });
+    </script>
+    <style>
+        .post-item {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+    </style>
+</body>
+</html>

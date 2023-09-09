@@ -1,0 +1,10 @@
+INSERT INTO user (id, username, email) VALUES (1, 'john', 'john.doe@example.com');
+INSERT INTO user (id, username, email) VALUES (2, 'jane', 'jane.smith@example.com');
+INSERT INTO user (id, username, email) VALUES (3, 'mike', 'mike.johnson@example.com');
+INSERT INTO user (id, username, email) VALUES (4, 'emily', 'emily.brown@example.com');
+INSERT INTO user (id, username, email) VALUES (5, 'david', 'david.wilson@example.com');
+INSERT INTO user (id, username, email) VALUES (6, 'sarah', 'sarah.taylor@example.com');
+INSERT INTO user (id, username, email) VALUES (7, 'robert', 'robert.anderson@example.com');
+INSERT INTO user (id, username, email) VALUES (8, 'laura', 'laura.davis@example.com');
+INSERT INTO user (id, username, email) VALUES (9, 'michael', 'michael.lee@example.com');
+INSERT INTO user (id, username, email) VALUES (10, 'jennifer', 'jennifer.clark@example.com');

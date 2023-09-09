@@ -1,0 +1,58 @@
+{
+  "tests": [
+   {
+      "name": "unit testQuery",
+      "setup": "",
+      "run": "mvn verify -Dtest=PostResourceTest#testQuery -DfailIfNoTests=false -am --file pom.xml",
+      "input": "",
+      "output": "",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "unit testCreate",
+      "setup": "",
+      "run": "mvn verify -Dtest=PostResourceTest#testCreate -DfailIfNoTests=false -am  --file pom.xml",
+      "input": "",
+      "output": "",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "unit testDelete",
+      "setup": "",
+      "run": "mvn verify -Dtest=PostResourceTest#testDelete -DfailIfNoTests=false -am  --file pom.xml",
+      "input": "",
+      "output": "",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "IT testCreate",
+      "setup": "",
+      "run": "mvn verify -Dit.test=PostResourceIT#testCreate -DfailIfNoTests=false -am  --file pom.xml",
+      "input": "",
+      "output": "",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "IT testRetrieve",
+      "setup": "",
+      "run": "mvn verify -Dit.test=PostResourceIT#testRetrieve -DfailIfNoTests=false -am --file pom.xml",
+      "input": "",
+      "output": "",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "IT testDelete",
+      "setup": "",
+      "run": "mvn test -Dit.test=PostResourceIT#testDelete -DfailIfNoTests=false -am  --file pom.xml",
+      "input": "",
+      "output": "",
+      "timeout": 10,
+      "points": 10
+    }
+   ]
+}
